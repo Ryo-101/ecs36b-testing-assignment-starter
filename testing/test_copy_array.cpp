@@ -13,15 +13,15 @@ TEST(CopyArrayTests, SimpleValuesAreSame) {
      * Don't forget to free any memory that was dynamically allocated as part of your test.
      */
 
-    int arrayOne[] = {1, 2, 3, 4, 5};
-    int* arrayTwo = copy_array(arrayOne, 5);
+    int original[] = {1, 2, 3, 4, 5};
+    int* copy = copy_array(original, 5);
 
     for (int i = 0; i < 5; i++)
     {
-        EXPECT_EQ(arrayOne[i], arrayTwo[i]);
+        EXPECT_EQ(original[i], copy[i]);
     }
 
-    free(arrayTwo);
+    free(copy);
 
 }
 
@@ -30,6 +30,24 @@ TEST(CopyArrayTests, SimpleOriginalDoesNotChange) {
      * Check that the  values in the original array did not change.
      * Don't forget to free any memory that was dynamically allocated as part of your test.
      */
+
+    int original[] = {1, 2, 3, 4, 5};
+
+    int replica[5];
+
+    for (int i = 0; i < 5; i++)
+    {
+        replica[i] = original[i];
+    }
+
+    int* copy = copy_array(original, 5);
+
+    for (int i = 0; i < 5; i++)
+    {
+        EXPECT_EQ(original[i], replica[i]);
+    }
+
+    free(copy);
 
 }
 
