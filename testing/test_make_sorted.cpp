@@ -17,6 +17,16 @@ TEST(MakeSortedTests, SimpleSortReverseSortedArray) {
      * Check that we can sort an array that is reverse sorted order.
      * Don't forget to free any memory that was dynamically allocated as part of your test.
      */
+
+    int original[] = {9, 8, 4, 3, 2};
+
+    make_sorted(original, 5);
+
+    for (int i = 0; i < 4; i++)
+    {
+        EXPECT_LE(original[i], original[i + 1]);
+    }
+
 }
 
 
