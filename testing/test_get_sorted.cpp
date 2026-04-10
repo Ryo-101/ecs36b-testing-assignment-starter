@@ -45,6 +45,15 @@ TEST(GetSortedTests, SimpleOriginalDoesNotChange) {
      * Don't forget to free any memory that was dynamically allocated as part of your test.
      */
 
+    int original[] = {4, 2, 6, 1, 5};
+
+    int* sorted = get_sorted(original, 5);
+
+    EXPECT_EQ(original[0], 4);
+    EXPECT_EQ(original[1], 2);
+    EXPECT_EQ(original[2], 6);
+    EXPECT_EQ(original[3], 1);
+    EXPECT_EQ(original[4], 5);
 
 }
 
