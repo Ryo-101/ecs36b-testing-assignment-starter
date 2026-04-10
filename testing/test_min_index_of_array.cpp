@@ -51,11 +51,11 @@ TEST(MinIndexOfArrayTests, SimpleDuplicateMinimums) {
      * When there are multiple values that are the minimum.
      */
 
-    int array[] = {3, 5, 2, 7, 0};
+    int array[] = {3, 0, 2, 7, 0};
 
     int minIndex = min_index_of_array(array, 5);
 
-    EXPECT_EQ(minIndex, 4);
+    EXPECT_EQ(minIndex, 1);
 
 }
 
@@ -63,6 +63,17 @@ TEST(MinIndexOfArrayTests, SimpleArrayDoesNotChange) {
     /*
      * Check that finding the minimum of the array did not change the contents of the array.
      */
+
+    int array[] = {5, 3, 6, 2, 9};
+
+    int minIndex = min_index_of_array(array, 5);
+
+    EXPECT_EQ(array[0], 5);
+    EXPECT_EQ(array[1], 3);
+    EXPECT_EQ(array[2], 6);
+    EXPECT_EQ(array[3], 2);
+    EXPECT_EQ(array[4], 9);
+
 }
 
 
