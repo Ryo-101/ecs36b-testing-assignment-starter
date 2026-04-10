@@ -12,6 +12,12 @@ TEST(SwapTests, SimpleSwapTwoValues) {
     /*
      * Swap two values and see if the swap was successful.
      */
+
+    int valueOne = 1;
+    int valueTwo = 99;
+
+    swap(&valueOne, &valueTwo);
+
 }
 
 TEST(SwapTests, SimpleSwapValuesInArray) {
