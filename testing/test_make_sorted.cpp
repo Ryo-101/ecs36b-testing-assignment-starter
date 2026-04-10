@@ -25,6 +25,16 @@ TEST(MakeSortedTests, SimpleSortAverageArray) {
      * Check that we can sort an array where the elements in it are in random order.
      * Don't forget to free any memory that was dynamically allocated as part of your test.
      */
+
+    int original[] = {6, 8, 3, 1, 7};
+
+    make_sorted(original, 5);
+
+    for (int i = 0; i < 4; i++)
+    {
+        EXPECT_LE(original[i], original[i + 1]);
+    }
+
 }
 
 TEST(MakeSortedTests, SimpleSortArrayWithDuplicates) {
