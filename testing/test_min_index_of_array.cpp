@@ -9,6 +9,13 @@ TEST(MinIndexOfArrayTests, SimpleMinIndexAtFrontOfArray) {
     /*
      * See if we can find the index of the minimum value when it is at the front of the array
      */
+
+    int array[] = {3, 5, 6, 4, 9};
+
+    int minIndex = min_index_of_array(array, 5);
+
+    EXPECT_EQ(minIndex, 0);
+
 }
 
 TEST(MinIndexOfArrayTests, SimpleMinIndexAtEndOfArray) {
