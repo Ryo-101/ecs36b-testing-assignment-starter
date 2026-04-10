@@ -22,6 +22,13 @@ TEST(MinIndexOfArrayTests, SimpleMinIndexAtEndOfArray) {
     /*
      * See if we can find the index of the minimum value when it is at the end of the array
      */
+
+    int array[] = {6, 4, 3, 7, 2};
+
+    int minIndex = min_index_of_array(array, 5);
+
+    EXPECT_EQ(minIndex, 4);
+
 }
 
 TEST(MinIndexOfArrayTests, SimpleMinIndexAtMiddleOfArray) {
