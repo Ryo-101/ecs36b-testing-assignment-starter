@@ -14,14 +14,12 @@ TEST(SwapTests, SimpleSwapTwoValues) {
      */
 
     int valueOne = 1;
-    int tempOne = valueOne;
     int valueTwo = 99;
-    int tempTwo = valueTwo;
 
     swap(&valueOne, &valueTwo);
 
-    EXPECT_EQ(valueTwo, tempOne);
-    EXPECT_EQ(valueOne, tempTwo);
+    EXPECT_EQ(valueTwo, 1);
+    EXPECT_EQ(valueOne, 99);
 
 }
 
@@ -31,6 +29,14 @@ TEST(SwapTests, SimpleSwapValuesInArray) {
      * Check that the ones that swapped did swap and the ones that didn't swap
      * are still at the same locations
      */
+
+    int array[] = {1, 2, 4, 3, 5};
+
+    swap(array + 2, array + 3);
+
+    EXPECT_EQ(array[2], 3);
+    EXPECT_EQ(array[3], 4);
+
 }
 
 RC_GTEST_PROP(SwapTests,
