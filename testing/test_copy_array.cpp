@@ -13,6 +13,15 @@ TEST(CopyArrayTests, SimpleValuesAreSame) {
      * Don't forget to free any memory that was dynamically allocated as part of your test.
      */
 
+    int arrayOne[] = {1, 2, 3, 4, 5};
+    int* arrayTwo = copy_array(arrayOne, 5);
+
+    for (int i = 0; i < 5; i++)
+    {
+        EXPECT_EQ(arrayOne[i], arrayTwo[i]);
+    }
+
+    free(arrayTwo);
 
 }
 
