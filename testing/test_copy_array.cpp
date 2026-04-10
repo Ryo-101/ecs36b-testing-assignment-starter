@@ -58,6 +58,17 @@ TEST(CopyArrayTests, SimpleCopyWasMade) {
      * Don't forget to free any memory that was dynamically allocated as part of your test.
      */
 
+    int original[] = {1, 2, 3, 4, 5};
+
+    int* copy = copy_array(original, 5);
+
+    for (int i = 0; i < 5; i++)
+    {
+        EXPECT_NE(original + i, copy + i);
+    }
+
+    free(copy);
+
 }
 
 
