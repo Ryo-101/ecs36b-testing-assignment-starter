@@ -14,9 +14,14 @@ TEST(SwapTests, SimpleSwapTwoValues) {
      */
 
     int valueOne = 1;
+    int tempOne = valueOne;
     int valueTwo = 99;
+    int tempTwo = valueTwo;
 
     swap(&valueOne, &valueTwo);
+
+    EXPECT_EQ(valueTwo, tempOne);
+    EXPECT_EQ(valueOne, tempTwo);
 
 }
 
