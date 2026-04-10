@@ -50,6 +50,13 @@ TEST(MinIndexOfArrayTests, SimpleDuplicateMinimums) {
      * See if we return the index of the first minimum in the array
      * When there are multiple values that are the minimum.
      */
+
+    int array[] = {3, 5, 2, 7, 0};
+
+    int minIndex = min_index_of_array(array, 5);
+
+    EXPECT_EQ(minIndex, 4);
+
 }
 
 TEST(MinIndexOfArrayTests, SimpleArrayDoesNotChange) {
