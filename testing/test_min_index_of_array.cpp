@@ -36,6 +36,13 @@ TEST(MinIndexOfArrayTests, SimpleMinIndexAtMiddleOfArray) {
      * See if we can find the index of the minimum value when it is somewhere
      * in the "middle" of the array.
      */
+
+    int array[] = {7, 9, 1, 3, 6};
+
+    int minIndex = min_index_of_array(array, 5);
+
+    EXPECT_EQ(minIndex, 2);
+
 }
 
 TEST(MinIndexOfArrayTests, SimpleDuplicateMinimums) {
