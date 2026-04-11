@@ -64,6 +64,19 @@ TEST(GetSortedTests, SimpleCopyWasMade) {
      * Don't forget to free any memory that was dynamically allocated as part of your test.
      */
 
+    int original[] = {6, 3, 5, 2, 7};
+
+    int* sorted = get_sorted(original, 5);
+
+    for (int i = 0; i < 5; i++)
+    {
+        for (int j = 0; j < 5; j++)
+        {
+            EXPECT_NE(original + i, sorted + j);
+        }
+    }
+
+    free(sorted);
 
 }
 
