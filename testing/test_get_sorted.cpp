@@ -42,6 +42,13 @@ TEST(GetSortedTests, SimpleSortAverageArray) {
      * Don't forget to free any memory that was dynamically allocated as part of your test.
      */
 
+    int original[] = {4, 3, 6, 1, 7};
+
+    int* sorted = get_sorted(original, 5);
+
+    expect_sorted(sorted, 5);
+
+    free(sorted);
 
 }
 
@@ -51,6 +58,13 @@ TEST(GetSortedTests, SimpleSortArrayWithDuplicates) {
      * Don't forget to free any memory that was dynamically allocated as part of your test.
      */
 
+    int original[] = {6, 2, 5, 2, 4};
+
+    int* sorted = get_sorted(original, 5);
+
+    expect_sorted(sorted, 5);
+
+    free(sorted);
 
 }
 
