@@ -15,10 +15,7 @@ TEST(MakeSortedTests, SimpleSortSortedArray) {
 
     make_sorted(original, 5);
 
-    for (int i = 0; i < 4; i++)
-    {
-        EXPECT_LE(original[i], original[i + 1]);
-    }
+    expect_sorted(original, 5);
 
 }
 
@@ -32,10 +29,7 @@ TEST(MakeSortedTests, SimpleSortReverseSortedArray) {
 
     make_sorted(original, 5);
 
-    for (int i = 0; i < 4; i++)
-    {
-        EXPECT_LE(original[i], original[i + 1]);
-    }
+    expect_sorted(original, 5);
 
 }
 
@@ -50,10 +44,7 @@ TEST(MakeSortedTests, SimpleSortAverageArray) {
 
     make_sorted(original, 5);
 
-    for (int i = 0; i < 4; i++)
-    {
-        EXPECT_LE(original[i], original[i + 1]);
-    }
+    expect_sorted(original, 5);
 
 }
 
@@ -67,10 +58,7 @@ TEST(MakeSortedTests, SimpleSortArrayWithDuplicates) {
 
     make_sorted(original, 5);
 
-    for (int i = 0; i < 4; i++)
-    {
-        EXPECT_LE(original[i], original[i + 1]);
-    }
+    expect_sorted(original, 5);
 
 }
 
