@@ -55,6 +55,8 @@ TEST(GetSortedTests, SimpleOriginalDoesNotChange) {
     EXPECT_EQ(original[3], 1);
     EXPECT_EQ(original[4], 5);
 
+    free(sorted);
+
 }
 
 TEST(GetSortedTests, SimpleCopyWasMade) {

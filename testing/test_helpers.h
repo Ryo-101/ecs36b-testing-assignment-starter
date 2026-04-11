@@ -6,6 +6,16 @@
 #include <vector>
 #include <algorithm>
 
+#include "gtest/gtest.h"
+
+void expect_sorted(const int* array, const int len)
+{
+    for (int i = 0; i < len - 1; i++)
+    {
+        EXPECT_LE(array[i], array[i+1]);
+    }
+}
+
 
 template <typename T>
 void copy_vector_to_array(const std::vector<T>& vector_values, T* array_values) {
