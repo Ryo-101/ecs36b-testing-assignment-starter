@@ -10,6 +10,13 @@ TEST(GetSortedTests, SimpleSortSortedArray) {
      * Don't forget to free any memory that was dynamically allocated as part of your test.
      */
 
+    int original[] = {1, 2, 3, 4, 5};
+
+    int* sorted = get_sorted(original, 5);
+
+    expect_sorted(sorted, 5);
+
+    free(sorted);
 
 }
 
@@ -18,6 +25,14 @@ TEST(GetSortedTests, SimpleSortReverseSortedArray) {
      * Check that we can sort an array that is reverse sorted order.
      * Don't forget to free any memory that was dynamically allocated as part of your test.
      */
+
+    int original[] = {5, 4, 3, 2, 1};
+
+    int* sorted = get_sorted(original, 5);
+
+    expect_sorted(sorted, 5);
+
+    free(sorted);
 
 }
 
