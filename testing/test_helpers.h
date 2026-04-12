@@ -8,13 +8,7 @@
 
 #include "gtest/gtest.h"
 
-void expect_sorted(const int* array, const int len)
-{
-    for (int i = 0; i < len - 1; i++)
-    {
-        EXPECT_LE(array[i], array[i+1]);
-    }
-}
+void expect_sorted(const int* array, const int len);
 
 
 template <typename T>
