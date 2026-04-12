@@ -46,6 +46,18 @@ RC_GTEST_PROP(SwapTests,
     /*
      * Swap two values and see if the swap was successful.
      */
+
+    a_start = rc::gen::arbitrary<int>();
+    b_start = rc::gen::arbitrary<int>();
+
+    int tempA = a_start;
+    int tempB = b_start;
+
+    swap(&a_start, &b_start);
+
+    RC_ASSERT(b_start == tempA);
+    RC_ASSERT(a_start == tempB);
+
 }
 
 
