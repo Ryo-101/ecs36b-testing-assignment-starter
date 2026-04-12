@@ -143,6 +143,21 @@ RC_GTEST_PROP(CopyArrayTests,
   * Don't forget to free any memory that was dynamically allocated as part of your test.
   */
 
+    values = rc::gen::suchThat(
+                                rc::gen::arbitrary<std::vector<int>>(),
+                                [](const auto vector)
+                                {
+                                    return vector.size() > 1;
+                                }
+                                ).as("vectorInt");
+
+    int* copy = copy_array(values, values.size());
+
+    for (int i = 0; i < values.size(); i++)
+    {
+        RC_ASSERT((values + i) != (copy + i));
+    }
+
 }
 
 
