@@ -68,4 +68,20 @@ RC_GTEST_PROP(SwapTests,
     /*
      * Swap two values in an array. See that they swapped and the others did not
      */
+
+    values = rc::gen::suchThat(
+                                rc::gen::arbitrary<std::vector<int>>(), // generator
+                                [](const auto &vector) // lambda function
+                                {
+                                    return vector.size() > 1; // min length of vectors is 2
+                                }).as("vectorInt"); // refer to a vectorInt in test logs
+
+    int tempOne = values[0];
+    int tempTwo = values[1];
+
+    swap(values, values + 1);
+
+    RC_ASSERT(values[0] == tempTwo);
+    RC_ASSERT(values[1] == tempOne);
+
 }
