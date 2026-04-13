@@ -107,6 +107,8 @@ RC_GTEST_PROP(MinIndexOfArrayTests,
         RC_ASSERT(original[minIndex] <= original[i]);
     }
 
+    free(original);
+
 }
 
 RC_GTEST_PROP(MinIndexOfArrayTests,
@@ -115,4 +117,24 @@ RC_GTEST_PROP(MinIndexOfArrayTests,
     /*
      * Check that finding the minimum of the array did not change the contents of the array.
      */
+
+    const auto values = *rc::gen::suchThat(
+                                            rc::gen::arbitrary<std::vector<int>>(),
+                                            [](const auto &vector)
+                                            {
+                                                return vector.size() > 1;
+                                            }
+                                            );
+
+    int* original = (int*)calloc(sizeof(int), values.size());
+
+    const int minIndex = min_index_of_array(original, values.size());
+
+    for (size_t i = 0; i < values.size(); i++)
+    {
+        RC_ASSERT(original[i] == values[i]);
+    }
+
+    free(original);
+
 }
