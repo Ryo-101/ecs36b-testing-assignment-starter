@@ -74,24 +74,24 @@ TEST(CopyArrayTests, SimpleCopyWasMade) {
 
 RC_GTEST_PROP(CopyArrayTests,
               PropertyValuesAreSame,
-              (const std::vector<int>& values)
+              ()
 ) {
     /*
      * Check that the values in the copy are the same as the values in the original array.
      * Don't forget to free any memory that was dynamically allocated as part of your test.
      */
 
-    values = rc::gen::suchThat(
+    auto values = *rc::gen::suchThat(
                                 rc::gen::arbitrary<std::vector<int>>(),
-                                [](const auto vector)
+                                [](const auto &vector)
                                 {
-                                    return vector.size() > 1;
+                                    return vector.size() > 0;
                                 }
                                 ).as("vectorInt");
 
-    int* copy = copy_array(values, values.size());
+    int* copy = copy_array(values.data(), values.size());
 
-    for (int i = 0; i < values.size(); i++)
+    for (size_t i = 0; i < values.size(); i++)
     {
         RC_ASSERT(copy[i] == values[i]);
     }
@@ -102,33 +102,31 @@ RC_GTEST_PROP(CopyArrayTests,
 
 RC_GTEST_PROP(CopyArrayTests,
               PropertyOriginalDoesNotChange,
-              (const std::vector<int>&values)
+              ()
 ) {
     /*
      * Check that the  values in the original array did not change.
      * Don't forget to free any memory that was dynamically allocated as part of your test.
      */
 
-    values = rc::gen::suchThat(
+    const auto values = *rc::gen::suchThat(
                                 rc::gen::arbitrary<std::vector<int>>(),
-                                [](const auto vector)
+                                [](const auto &vector)
                                 {
-                                    return vector.size() > 1;
+                                    return vector.size() > 0;
                                 }
                                 ).as("vectorInt");
 
-    int replica[values.size()];
 
-    for (int i = 0; i < replica.size(); i++)
+    int original[values.size()];
+
+    copy_vector_to_array(values, original);
+
+    int* copy = copy_array(original, original.size());
+
+    for (size_t i = 0; i < values.size(); i++)
     {
-        replica[i] = values[i];
-    }
-
-    int* copy = copy_array(values, values.size());
-
-    for (int i = 0; i < values.size(); i++)
-    {
-        RC_ASSERT(values[i] == replica[i]);
+        RC_ASSERT(values[i] == original[i]);
     }
 
 }
