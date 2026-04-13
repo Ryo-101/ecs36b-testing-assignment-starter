@@ -4,8 +4,10 @@
 #include "gmock/gmock.h"
 #include "rapidcheck/gtest.h"
 #include "sorting.h"
+#include "test_helpers.h"
 
-TEST(MinIndexOfArrayTests, SimpleMinIndexAtFrontOfArray) {
+TEST(MinIndexOfArrayTests, SimpleMinIndexAtFrontOfArray)
+{
     /*
      * See if we can find the index of the minimum value when it is at the front of the array
      */
@@ -68,6 +70,8 @@ TEST(MinIndexOfArrayTests, SimpleArrayDoesNotChange) {
 
     int minIndex = min_index_of_array(array, 5);
 
+    EXPECT_EQ(minIndex, 3);
+
     EXPECT_EQ(array[0], 5);
     EXPECT_EQ(array[1], 3);
     EXPECT_EQ(array[2], 6);
@@ -83,6 +87,26 @@ RC_GTEST_PROP(MinIndexOfArrayTests,
     /* Check that the value at the location of the minimum index
      * is not larger than any of the other values in the array
      */
+
+    const auto values = *rc::gen::suchThat(
+                            rc::gen::arbitrary<std::vector<int>>(),
+                            [](const auto &vector)
+                            {
+                                return vector.size() > 1;
+                            }
+                            );
+
+    int* original = (int*)calloc(sizeof(int), values.size());
+
+    copy_vector_to_array(values, original);
+
+    const int minIndex = min_index_of_array(original, values.size());
+
+    for (size_t i = 0; i < values.size(); i++)
+    {
+        RC_ASSERT(original[minIndex] <= original[i]);
+    }
+
 }
 
 RC_GTEST_PROP(MinIndexOfArrayTests,

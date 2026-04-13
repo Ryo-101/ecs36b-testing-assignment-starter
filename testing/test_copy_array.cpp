@@ -162,6 +162,8 @@ RC_GTEST_PROP(CopyArrayTests,
         RC_ASSERT((original + i) != (copy + i));
     }
 
+    free(original);
+
 }
 
 
