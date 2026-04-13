@@ -118,22 +118,24 @@ RC_GTEST_PROP(CopyArrayTests,
                                 ).as("vectorInt");
 
 
-    int original[values.size()];
+    const auto original = (int*)calloc(sizeof(int), values.size());
 
     copy_vector_to_array(values, original);
 
-    int* copy = copy_array(original, original.size());
+    const int* copy = copy_array(original, values.size());
 
     for (size_t i = 0; i < values.size(); i++)
     {
-        RC_ASSERT(values[i] == original[i]);
+        RC_ASSERT(copy[i] == original[i]);
     }
+
+    free(original);
 
 }
 
 RC_GTEST_PROP(CopyArrayTests,
               PropertyCopyWasMade,
-              (const std::vector<int>&values)
+              ()
 ) {
     /*
   * Check that a copy was actually made
@@ -141,19 +143,23 @@ RC_GTEST_PROP(CopyArrayTests,
   * Don't forget to free any memory that was dynamically allocated as part of your test.
   */
 
-    values = rc::gen::suchThat(
+    const auto values = *rc::gen::suchThat(
                                 rc::gen::arbitrary<std::vector<int>>(),
-                                [](const auto vector)
+                                [](const auto &vector)
                                 {
-                                    return vector.size() > 1;
+                                    return vector.size() > 0;
                                 }
                                 ).as("vectorInt");
 
-    int* copy = copy_array(values, values.size());
+    const auto original = (int*)calloc(sizeof(int), values.size());
 
-    for (int i = 0; i < values.size(); i++)
+    copy_vector_to_array(values, original);
+
+    int* copy = copy_array(original, values.size());
+
+    for (size_t i = 0; i < values.size(); i++)
     {
-        RC_ASSERT((values + i) != (copy + i));
+        RC_ASSERT((original + i) != (copy + i));
     }
 
 }
