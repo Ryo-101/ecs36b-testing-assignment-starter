@@ -76,10 +76,7 @@ RC_GTEST_PROP(MakeSortedTests,
 
     make_sorted(arrayCopy, values.size());
 
-    for (size_t i = 0; i < values.size() - 1; i++)
-    {
-        RC_ASSERT(arrayCopy[i] <= arrayCopy[i+1]);
-    }
+    rc_assert_sorted(arrayCopy, values.size());
 
     free(arrayCopy);
 

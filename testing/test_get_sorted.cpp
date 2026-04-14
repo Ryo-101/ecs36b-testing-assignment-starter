@@ -120,6 +120,16 @@ RC_GTEST_PROP(GetSortedTests,
      * Don't forget to free any memory that was dynamically allocated as part of this test
      */
 
+    int* original = (int*)calloc(sizeof(int), values.size());
+
+    copy_vector_to_array(values, original);
+
+    int* sorted = get_sorted(original, values.size());
+
+    rc_assert_sorted(sorted, values.size());
+
+    free(original);
+
 }
 
 RC_GTEST_PROP(GetSortedTests,
