@@ -129,6 +129,7 @@ RC_GTEST_PROP(GetSortedTests,
     rc_assert_sorted(sorted, values.size());
 
     free(original);
+    free(sorted);
 
 }
 
@@ -141,6 +142,24 @@ RC_GTEST_PROP(GetSortedTests,
      * Don't forget to free any memory that was dynamically allocated as part of your test.
      */
     ;
+
+    int* original = (int*)calloc(sizeof(int), values.size());
+
+    copy_vector_to_array(values, original);
+
+    const auto copy(original);
+
+    int* sorted = get_sorted(original, values.size());
+
+    for (size_t i = 0; i < values.size(); i++)
+    {
+        RC_ASSERT(original[i] == copy[i]);
+    }
+
+    free(original);
+    free(copy);
+    free(sorted);
+
 }
 
 RC_GTEST_PROP(GetSortedTests,
@@ -152,6 +171,23 @@ RC_GTEST_PROP(GetSortedTests,
      * (ar and copy point to different locations in memory and no parts of the two arrays overlap)
      * Don't forget to free any memory that was dynamically allocated as part of your test.
      */
+
+    int* original = (int*)calloc(sizeof(int), values.size());
+
+    copy_vector_to_array(values, original);
+
+    int* sorted = get_sorted(original, values.size());
+
+    for (size_t i = 0; i < values.size(); i++)
+    {
+        for (size_t j = 0; j < values.size(); j++)
+        {
+            RC_ASSERT((original + i) != (sorted + j));
+        }
+    }
+
+    free(original);
+    free(sorted);
 
 }
 
