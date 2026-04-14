@@ -10,6 +10,8 @@
 
 void expect_sorted(const int* array, const int len);
 
+void rc_assert_sorted(const int* array, const int len);
+
 
 template <typename T>
 void copy_vector_to_array(const std::vector<T>& vector_values, T* array_values) {

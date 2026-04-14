@@ -81,4 +81,6 @@ RC_GTEST_PROP(MakeSortedTests,
         RC_ASSERT(arrayCopy[i] <= arrayCopy[i+1]);
     }
 
+    free(arrayCopy);
+
 }
