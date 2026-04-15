@@ -107,7 +107,7 @@ RC_GTEST_PROP(CopyArrayTests,
                                 ).as("vectorInt");
 
 
-    auto original = (int*)calloc(sizeof(int), values.size());
+    auto original = (int*)calloc(values.size(), sizeof(int));
 
     copy_vector_to_array(values, original);
 
@@ -141,7 +141,7 @@ RC_GTEST_PROP(CopyArrayTests,
                                 }
                                 ).as("vectorInt");
 
-    auto original = (int*)calloc(sizeof(int), values.size());
+    auto original = (int*)calloc(values.size(), sizeof(int));
 
     copy_vector_to_array(values, original);
 

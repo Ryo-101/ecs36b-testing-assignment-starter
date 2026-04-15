@@ -70,7 +70,7 @@ RC_GTEST_PROP(MakeSortedTests,
      * Don't forget to free any memory that was dynamically allocated as part of your test.
      */
 
-    int* arrayCopy = (int*)calloc(sizeof(int), values.size());
+    int* arrayCopy = (int*)calloc(values.size(), sizeof(int));
 
     copy_vector_to_array(values, arrayCopy);
 

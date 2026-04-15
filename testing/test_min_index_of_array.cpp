@@ -96,7 +96,7 @@ RC_GTEST_PROP(MinIndexOfArrayTests,
                             }
                             );
 
-    int* original = (int*)calloc(sizeof(int), values.size());
+    int* original = (int*)calloc(values.size(), sizeof(int));
 
     copy_vector_to_array(values, original);
 
@@ -126,7 +126,7 @@ RC_GTEST_PROP(MinIndexOfArrayTests,
                                             }
                                             );
 
-    int* original = (int*)calloc(sizeof(int), values.size());
+    int* original = (int*)calloc(values.size(), sizeof(int));
 
     const int minIndex = min_index_of_array(original, values.size());
 

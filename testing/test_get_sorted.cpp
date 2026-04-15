@@ -118,7 +118,7 @@ RC_GTEST_PROP(GetSortedTests,
      * Don't forget to free any memory that was dynamically allocated as part of this test
      */
 
-    int* original = (int*)calloc(sizeof(int), values.size());
+    int* original = (int*)calloc(values.size(), sizeof(int));
 
     copy_vector_to_array(values, original);
 
@@ -141,7 +141,7 @@ RC_GTEST_PROP(GetSortedTests,
      */
     ;
 
-    int* original = (int*)calloc(sizeof(int), values.size());
+    int* original = (int*)calloc(values.size(), sizeof(int));
 
     copy_vector_to_array(values, original);
 
@@ -167,7 +167,7 @@ RC_GTEST_PROP(GetSortedTests,
      * Don't forget to free any memory that was dynamically allocated as part of your test.
      */
 
-    int* original = (int*)calloc(sizeof(int), values.size());
+    int* original = (int*)calloc(values.size(), sizeof(int));
 
     copy_vector_to_array(values, original);
 
