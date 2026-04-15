@@ -1,11 +1,7 @@
 #ifndef TESTINGANDDEBUGGING_TEST_HELPERS_H
 #define TESTINGANDDEBUGGING_TEST_HELPERS_H
-/* Put any extra functions you use to help you out with testing here.
- *
- */
 #include <vector>
 #include <algorithm>
-
 #include "gtest/gtest.h"
 
 void expect_sorted(const int* array, int len);

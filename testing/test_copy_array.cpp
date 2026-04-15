@@ -118,13 +118,13 @@ RC_GTEST_PROP(CopyArrayTests,
                                 ).as("vectorInt");
 
 
-    const auto original = (int*)calloc(sizeof(int), values.size());
+    auto original = (int*)calloc(sizeof(int), values.size());
 
     copy_vector_to_array(values, original);
 
-    const auto replica(original);
+    auto replica(original);
 
-    const int* copy = copy_array(original, values.size());
+    int* copy = copy_array(original, values.size());
 
     rc_assert_arrays_equal(original, replica, values.size());
 
@@ -152,7 +152,7 @@ RC_GTEST_PROP(CopyArrayTests,
                                 }
                                 ).as("vectorInt");
 
-    const auto original = (int*)calloc(sizeof(int), values.size());
+    auto original = (int*)calloc(sizeof(int), values.size());
 
     copy_vector_to_array(values, original);
 
@@ -161,6 +161,7 @@ RC_GTEST_PROP(CopyArrayTests,
     rc_assert_no_overlap(original, copy, values.size());
 
     free(original);
+    free(copy);
 
 }
 
