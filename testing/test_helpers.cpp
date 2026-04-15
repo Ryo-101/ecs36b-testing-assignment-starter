@@ -14,6 +14,14 @@ void expect_sorted(const int* array, const int len)
     }
 }
 
+void expect_arrays_equal(const int* arrayOne, const int* arrayTwo, const int len)
+{
+    for (int i = 0; i < len; i++)
+    {
+        EXPECT_EQ(arrayOne[i], arrayTwo[i]);
+    }
+}
+
 void rc_assert_arrays_equal(const int* arrayOne, const int* arrayTwo, const int len)
 {
     for (int i = 0; i < len; i++)
