@@ -76,13 +76,11 @@ TEST(GetSortedTests, SimpleOriginalDoesNotChange) {
 
     int original[] = {4, 2, 6, 1, 5};
 
+    const auto copy(original);
+
     int* sorted = get_sorted(original, 5);
 
-    EXPECT_EQ(original[0], 4);
-    EXPECT_EQ(original[1], 2);
-    EXPECT_EQ(original[2], 6);
-    EXPECT_EQ(original[3], 1);
-    EXPECT_EQ(original[4], 5);
+    expect_arrays_equal(original, copy, 5);
 
     free(sorted);
 

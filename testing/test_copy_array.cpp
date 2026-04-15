@@ -16,10 +16,7 @@ TEST(CopyArrayTests, SimpleValuesAreSame) {
     int original[] = {1, 2, 3, 4, 5};
     int* copy = copy_array(original, 5);
 
-    for (int i = 0; i < 5; i++)
-    {
-        EXPECT_EQ(original[i], copy[i]);
-    }
+    expect_arrays_equal(original, copy, 5);
 
     free(copy);
 
@@ -33,19 +30,11 @@ TEST(CopyArrayTests, SimpleOriginalDoesNotChange) {
 
     int original[] = {1, 2, 3, 4, 5};
 
-    int replica[5];
-
-    for (int i = 0; i < 5; i++)
-    {
-        replica[i] = original[i];
-    }
+    const auto replica(original);
 
     int* copy = copy_array(original, 5);
 
-    for (int i = 0; i < 5; i++)
-    {
-        EXPECT_EQ(original[i], replica[i]);
-    }
+    expect_arrays_equal(original, replica, 5);
 
     free(copy);
 
