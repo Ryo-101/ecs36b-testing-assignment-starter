@@ -42,6 +42,22 @@ TEST(ParseArgsTests, SimpleCheckParseNoArgs) {
     /*
      * Check that you parse you can successfully parse "no" command line arguments.
      */
+
+    char** strings = (char**)calloc(1, sizeof(char*));
+    strings[0] = (char*)calloc(6, sizeof(char));
+
+    strcpy(strings[0], "hello");
+
+    int* integers = nullptr;
+    int len = 1;
+
+    parse_args(1, strings, integers, &len);
+
+    EXPECT_EQ(integers, nullptr);
+
+    free(strings[0]);
+    free(strings);
+
 }
 
 
