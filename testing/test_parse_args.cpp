@@ -123,4 +123,16 @@ RC_GTEST_PROP(ParseArgsTests,
     /*
      * Check that you parse you can successfully parse "no" command line arguments.
      */
+
+    const std::string programName = *word_generator();
+    std::vector<std::string> commandArgs;
+    commandArgs.push_back(programName);
+
+    int* integers = nullptr;
+    int len = commandArgs.size();
+
+    parse_args(len, commandArgs, integers, &len);
+
+    RC_ASSERT();
+
 }
