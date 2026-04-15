@@ -157,10 +157,7 @@ RC_GTEST_PROP(CopyArrayTests,
 
     int* copy = copy_array(original, values.size());
 
-    for (size_t i = 0; i < values.size(); i++)
-    {
-        RC_ASSERT((original + i) != (copy + i));
-    }
+    rc_assert_no_overlap(original, copy, values.size());
 
     free(original);
 

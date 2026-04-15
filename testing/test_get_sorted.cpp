@@ -178,13 +178,7 @@ RC_GTEST_PROP(GetSortedTests,
 
     int* sorted = get_sorted(original, values.size());
 
-    for (size_t i = 0; i < values.size(); i++)
-    {
-        for (size_t j = 0; j < values.size(); j++)
-        {
-            RC_ASSERT((original + i) != (sorted + j));
-        }
-    }
+    rc_assert_no_overlap(original, sorted, values.size());
 
     free(original);
     free(sorted);
