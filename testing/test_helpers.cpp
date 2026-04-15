@@ -21,3 +21,14 @@ void rc_assert_sorted(const int* array, const int len)
         RC_ASSERT(array[i] <= array[i+1]);
     }
 }
+
+void rc_assert_no_overlap(const int* arrayOne, const int* arrayTwo, const int len)
+{
+    for (int i = 0; i < len; i++)
+    {
+        for (int j = 0; j < len; j++)
+        {
+            RC_ASSERT(arrayOne + i != arrayTwo + j);
+        }
+    }
+}
