@@ -10,6 +10,8 @@
 
 void expect_sorted(const int* array, int len);
 
+void rc_assert_arrays_equal(const int* arrayOne, const int* arrayTwo, int len);
+
 void rc_assert_sorted(const int* array, int len);
 
 void rc_assert_no_overlap(const int* arrayOne, const int* arrayTwo, int len);
