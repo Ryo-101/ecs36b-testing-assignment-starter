@@ -36,6 +36,39 @@ TEST(ParseArgsTests, SimpleCheckArgumentsParsedSuccessfully) {
      * (ar_out and len_out are set to the right values).
      * Don't forget to free any memory that was dynamically allocated as part of your test.'
      */
+
+    char** strings = (char**)calloc(6, sizeof(char*));
+    strings[0] = (char*)calloc(6, sizeof(char));
+
+    for (int i = 1; i < 6; i++)
+    {
+        strings[i] = (char*)calloc(3, sizeof(char));
+    }
+
+    int* integers = nullptr;
+    int len = 5;
+
+    strcpy(strings[0], "hello");
+    strcpy(strings[1], "1");
+    strcpy(strings[2], "2");
+    strcpy(strings[3], "3");
+    strcpy(strings[4], "4");
+    strcpy(strings[5], "5");
+
+    parse_args(6, strings, integers, &len);
+
+    for (int j = 0; j < 5; j++)
+    {
+        EXPECT_EQ(integers[j], std::atoi(strings[j+1]));
+    }
+
+    for (int k = 0; k < 6; k++)
+    {
+        free(strings[k]);
+    }
+
+    free(strings);
+
 }
 
 TEST(ParseArgsTests, SimpleCheckParseNoArgs) {
