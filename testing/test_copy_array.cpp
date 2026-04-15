@@ -122,14 +122,15 @@ RC_GTEST_PROP(CopyArrayTests,
 
     copy_vector_to_array(values, original);
 
+    const auto replica(original);
+
     const int* copy = copy_array(original, values.size());
 
-    for (size_t i = 0; i < values.size(); i++)
-    {
-        RC_ASSERT(copy[i] == original[i]);
-    }
+    rc_assert_arrays_equal(original, replica, values.size());
 
     free(original);
+    free(replica);
+    free(copy);
 
 }
 

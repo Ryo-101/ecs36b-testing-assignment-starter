@@ -151,10 +151,7 @@ RC_GTEST_PROP(GetSortedTests,
 
     int* sorted = get_sorted(original, values.size());
 
-    for (size_t i = 0; i < values.size(); i++)
-    {
-        RC_ASSERT(original[i] == copy[i]);
-    }
+    rc_assert_arrays_equal(original, copy, values.size());
 
     free(original);
     free(copy);
