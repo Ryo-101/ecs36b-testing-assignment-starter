@@ -45,8 +45,8 @@ TEST(ParseArgsTests, SimpleCheckArgumentsParsedSuccessfully) {
         strings[i] = (char*)calloc(3, sizeof(char));
     }
 
-    int* integers = nullptr;
-    int len = 5;
+    int* integers = (int*)88;
+    int len;
 
     strcpy(strings[0], "hello");
     strcpy(strings[1], "1");
@@ -61,6 +61,8 @@ TEST(ParseArgsTests, SimpleCheckArgumentsParsedSuccessfully) {
     {
         EXPECT_EQ(integers[j], std::atoi(strings[j+1]));
     }
+
+    EXPECT_EQ(len, 5);
 
     for (int k = 0; k < 6; k++)
     {
@@ -81,12 +83,13 @@ TEST(ParseArgsTests, SimpleCheckParseNoArgs) {
 
     strcpy(strings[0], "hello");
 
-    int* integers = nullptr;
-    int len = 1;
+    int* integers = (int*)88;
+    int len;
 
     parse_args(1, strings, integers, &len);
 
     EXPECT_EQ(integers, nullptr);
+    EXPECT_EQ(len, 0);
 
     free(strings[0]);
     free(strings);
@@ -107,13 +110,10 @@ RC_GTEST_PROP(ParseArgsTests,
     std::vector<std::string> commandArgs = vector_of_ints_to_vector_of_strings(values);
     commandArgs.insert(commandArgs.begin(), programName);
 
-    int* integers = nullptr;
-    int len = values.size() + 1;
+    int* integers = (int*)88;
+    int len;
 
-    parse_args(values.size() + 1, , integers, &len);
-
-    RC_ASSERT();
-
+    parse_args(len + 1, ..., integers, &len);
 }
 
 RC_GTEST_PROP(ParseArgsTests,
@@ -128,11 +128,12 @@ RC_GTEST_PROP(ParseArgsTests,
     std::vector<std::string> commandArgs;
     commandArgs.push_back(programName);
 
-    int* integers = nullptr;
-    int len = commandArgs.size();
+    int* integers = (int*)88;
+    int len;
 
-    parse_args(len, commandArgs, integers, &len);
+    parse_args(len, ..., integers, &len);
 
-    RC_ASSERT();
+    RC_ASSERT(integers == nullptr);
+    RC_ASSERT(len == 0);
 
 }
