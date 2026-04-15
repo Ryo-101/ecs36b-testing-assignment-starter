@@ -18,11 +18,11 @@ auto vector_of_ints_to_vector_of_strings(const std::vector<int>& numbers) {
     /* Create a vector of strings from a vector of ints
      */
 
-    std::vector<std::string> strings(numbers.size());
+    std::vector<std::string> strings;
 
     for (size_t i = 0; i < numbers.size(); i++)
     {
-        strings[i] = std::to_string(numbers[i]);
+        strings.push_back(std::to_string(numbers[i]));
     }
 
     return strings;
@@ -96,12 +96,24 @@ TEST(ParseArgsTests, SimpleCheckParseNoArgs) {
 
 RC_GTEST_PROP(ParseArgsTests,
               PropertyCheckArgumentsParsedSuccessfully,
-              ()
+              (std::vector<int> values)
 ) {
     /* Check that we can correctly parse the command line
      * arguments when we receive 1 or more arguments.
      * Don't forget to free any memory that was dynamically allocated as part of this test
      */
+
+    const std::string programName = *word_generator();
+    std::vector<std::string> commandArgs = vector_of_ints_to_vector_of_strings(values);
+    commandArgs.insert(commandArgs.begin(), programName);
+
+    int* integers = nullptr;
+    int len = values.size() + 1;
+
+    parse_args(values.size() + 1, , integers, &len);
+
+    RC_ASSERT();
+
 }
 
 RC_GTEST_PROP(ParseArgsTests,
