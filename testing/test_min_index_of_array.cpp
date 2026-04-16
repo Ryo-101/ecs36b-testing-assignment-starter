@@ -128,6 +128,8 @@ RC_GTEST_PROP(MinIndexOfArrayTests,
 
     int* original = (int*)calloc(values.size(), sizeof(int));
 
+    copy_vector_to_array(values, original);
+
     const int minIndex = min_index_of_array(original, values.size());
 
     for (size_t i = 0; i < values.size(); i++)

@@ -55,11 +55,11 @@ int min_index_of_array(int* ar, int len) {
   int min_index = 0;
 
   for (int i = 1; i < len; ++i) {
-    if (ar[i] > ar[min_index]) {
+    if (ar[i] < ar[min_index]) {
       min_index = i;
     }
   }
-  return ar[min_index];
+  return min_index;
 }
 
 void swap(int* a, int* b) {

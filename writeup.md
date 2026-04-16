@@ -187,3 +187,65 @@ int* copy_array(int* ar, int len) {
   return copy;
 }
 ```
+
+### Bug #5: min_index_of_array()
+
+### Location: sorting.cpp
+
+Line(s): 46-63
+
+```c++
+int min_index_of_array(int* ar, int len) {
+  /**
+ * Find the INDEX of the minimum value in ar. If there are multiple values that are
+ * the minimum, return the index of the first minimum.
+ * @param ar: The array to search through
+ * @param len: the number of elements in ar
+ * @return: The INDEX of the minimum value in ar
+ */
+
+  int min_index = 0;
+
+  for (int i = 1; i < len; ++i) {
+    if (ar[i] > ar[min_index]) {
+      min_index = i;
+    }
+  }
+  return ar[min_index];
+}
+```
+
+### How the bug was located
+
+Upon running a test, the expected ascending order of values in an array failed and program prompt it
+
+### Description
+
+When calling the min_index_of_array() function, it is actually getting the MAX index of the array
+Even so, it is returning the VALUE at such index (in this case the MAX), not the function's intent.
+
+### Fix
+
+We switch the comparitor signs from '>' to '<', that way it gets the MIN index of the array.
+Furthermore, we get rid of the ar[], and instead just return min_index, as intended by the function
+
+```c++
+int min_index_of_array(int* ar, int len) {
+  /**
+ * Find the INDEX of the minimum value in ar. If there are multiple values that are
+ * the minimum, return the index of the first minimum.
+ * @param ar: The array to search through
+ * @param len: the number of elements in ar
+ * @return: The INDEX of the minimum value in ar
+ */
+
+  int min_index = 0;
+
+  for (int i = 1; i < len; ++i) {
+    if (ar[i] < ar[min_index]) {
+      min_index = i;
+    }
+  }
+  return min_index;
+}
+```
