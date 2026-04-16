@@ -132,6 +132,11 @@ RC_GTEST_PROP(MinIndexOfArrayTests,
 
     for (size_t i = 0; i < values.size(); i++)
     {
+        RC_ASSERT(original[minIndex] <= original[i]);
+    }
+
+    for (size_t i = 0; i < values.size(); i++)
+    {
         RC_ASSERT(original[i] == values[i]);
     }
 

@@ -55,7 +55,7 @@ TEST(ParseArgsTests, SimpleCheckArgumentsParsedSuccessfully) {
     strcpy(strings[4], "4");
     strcpy(strings[5], "5");
 
-    parse_args(6, strings, integers, &len);
+    parse_args(6, strings, &integers, &len);
 
     for (int j = 0; j < 5; j++)
     {
@@ -81,7 +81,7 @@ TEST(ParseArgsTests, SimpleCheckParseNoArgs) {
     int* integers = (int*)88;
     int len;
 
-    parse_args(1, strings, integers, &len);
+    parse_args(1, strings, &integers, &len);
 
     EXPECT_EQ(integers, nullptr);
     EXPECT_EQ(len, 0);
@@ -109,7 +109,7 @@ RC_GTEST_PROP(ParseArgsTests,
     int* integers = (int*)88;
     int len;
 
-    parse_args(values.size() + 1, argsAsPointers, integers, &len);
+    parse_args(values.size() + 1, argsAsPointers, &integers, &len);
 
     RC_ASSERT(len == (int)values.size());
 
@@ -139,7 +139,7 @@ RC_GTEST_PROP(ParseArgsTests,
     int* integers = (int*)88;
     int len;
 
-    parse_args(1, argsAsPointers, integers, &len);
+    parse_args(1, argsAsPointers, &integers, &len);
 
     RC_ASSERT(integers == nullptr);
     RC_ASSERT(len == 0);

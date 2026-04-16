@@ -118,7 +118,6 @@ RC_GTEST_PROP(CopyArrayTests,
     rc_assert_arrays_equal(original, replica, values.size());
 
     free(original);
-    free(replica);
     free(copy);
 
 }

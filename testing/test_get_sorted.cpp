@@ -152,7 +152,6 @@ RC_GTEST_PROP(GetSortedTests,
     rc_assert_arrays_equal(original, copy, values.size());
 
     free(original);
-    free(copy);
     free(sorted);
 
 }
