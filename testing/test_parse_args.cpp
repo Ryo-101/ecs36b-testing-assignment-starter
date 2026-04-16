@@ -64,12 +64,7 @@ TEST(ParseArgsTests, SimpleCheckArgumentsParsedSuccessfully) {
 
     EXPECT_EQ(len, 5);
 
-    for (int k = 0; k < 6; k++)
-    {
-        free(strings[k]);
-    }
-
-    free(strings);
+    free_array_of_strings(strings, 6);
 
 }
 
@@ -91,8 +86,7 @@ TEST(ParseArgsTests, SimpleCheckParseNoArgs) {
     EXPECT_EQ(integers, nullptr);
     EXPECT_EQ(len, 0);
 
-    free(strings[0]);
-    free(strings);
+    free_array_of_strings(strings, 1);
 
 }
 
@@ -124,12 +118,7 @@ RC_GTEST_PROP(ParseArgsTests,
         RC_ASSERT(integers[i] == values[i]);
     }
 
-    for (size_t j = 0; j < commandArgs.size(); j++)
-    {
-        free(argsAsPointers[j]);
-    }
-
-    free(argsAsPointers);
+    free_array_of_strings(argsAsPointers, commandArgs.size());
 
 }
 
@@ -154,5 +143,7 @@ RC_GTEST_PROP(ParseArgsTests,
 
     RC_ASSERT(integers == nullptr);
     RC_ASSERT(len == 0);
+
+    free_array_of_strings(argsAsPointers, 1);
 
 }
