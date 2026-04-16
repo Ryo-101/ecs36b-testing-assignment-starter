@@ -15,6 +15,9 @@ void rc_assert_sorted(const int* array, int len);
 void rc_assert_no_overlap(const int* arrayOne, const int* arrayTwo, int len);
 
 
+char** string_vector_to_array_of_strings(std::vector<std::string> commandArgs);
+
+
 template <typename T>
 void copy_vector_to_array(const std::vector<T>& vector_values, T* array_values) {
     /* Copy the elements from vector_values into array values
