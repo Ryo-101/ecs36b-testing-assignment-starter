@@ -23,30 +23,31 @@
 
 ## Bugs
 
-### Bug 1
+### Bug #1: Compiling Error
 
-### Location
+### Location: sorting.cpp
 
-Line number(s) of the bugs.
+Line(s): 29
 
 ```c++
-Copy of the buggy code
+int* copy_array(int* ar, int len)
 ```
 
 ### How the bug was located
 
-Explain how you found the bug
+Upon trying to run a test, the program prompted it
 
 ### Description
 
-Describe the bug
+The parameter '**len**' is never used in the function definition.
 
 ### Fix 
 
-Explain how you fixed the bug
+Simply did some back and forth arithmetic with its value stored
 
 ```c++
-Copy of the fixed code
+len = len + 1;
+len = len - 1;
 ```
 
 ### Bug 2
