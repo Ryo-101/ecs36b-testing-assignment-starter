@@ -50,30 +50,34 @@ len = len + 1;
 len = len - 1;
 ```
 
-### Bug 2
+### Bug #2: Compiling Error
 
-### Location
+### Location: formatting.cpp
 
-Line number(s) of the bugs.
+Line(s): 36
 
 ```c++
-Copy of the buggy code
+sscanf(argv[i], "%d", ar_out[i]);
 ```
 
 ### How the bug was located
 
-Explain how you found the bug
+Upon trying to run a test, the program prompted it
 
 ### Description
 
-Describe the bug
+In the sscanf() function call, we get an int* from argv[], but trying to write it on an int argument of ar_out[] (not compatible data types)
 
 ### Fix
 
-Explain how you fixed the bug
+Added another * to ar_out so ar_out[] refers to an int* argument to write on. Also had to change malloc conversion to int**
 
 ```c++
-Copy of the fixed code
+void parse_args(int argc, char** argv, int** ar_out, int* len_out)
+{
+    ...
+    ar_out = (int**)malloc(*len_out);
+}
 ```
 
 ### Bug 3
