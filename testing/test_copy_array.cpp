@@ -34,6 +34,7 @@ TEST(CopyArrayTests, SimpleOriginalDoesNotChange) {
 
     int* copy = copy_array(original, 5);
 
+    expect_arrays_equal(original, copy, 5);
     expect_arrays_equal(original, replica, 5);
 
     free(copy);
@@ -53,7 +54,10 @@ TEST(CopyArrayTests, SimpleCopyWasMade) {
 
     for (int i = 0; i < 5; i++)
     {
-        EXPECT_NE(original + i, copy + i);
+        for (int j = 0; j < 5; j++)
+        {
+            EXPECT_NE(original + i, copy + i);
+        }
     }
 
     free(copy);

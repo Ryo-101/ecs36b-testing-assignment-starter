@@ -70,7 +70,9 @@ In the sscanf() function call, we get an int* from argv[], but trying to write i
 
 ### Fix
 
-Added another * to ar_out so ar_out[] refers to an int* argument to write on. Also had to change malloc conversion to int**
+Added another * to ar_out so ar_out[] refers to an int* argument to write on.
+Also had to change malloc conversion to int**.
+Lastly, add the '&' to the third argument on every instance of parse_args() being called
 
 ```c++
 void parse_args(int argc, char** argv, int** ar_out, int* len_out)
@@ -127,5 +129,61 @@ void swap(int* a, int* b) {
   int temp = *a;
   *a = *b;
   *b = temp;
+}
+```
+
+### Bug #4: copy_array()
+
+### Location: sorting.cpp
+
+Line(s): 29-40
+
+```c++
+int* copy_array(int* ar, int len) {
+  /**
+  * Return a copy of the array
+  * @param ar: The array to copy
+  * @param len: The length of the array to copy
+  * @return: A copy of ar
+  */
+  len = len + 1;
+  len = len - 1;
+  int* copy = ar;
+  return copy;
+}
+```
+
+### How the bug was located
+
+Upon running a test, the expect difference in addresses failed and program prompt it
+
+### Description
+
+When calling the copy_array() function, we are making copy hold the SAME address that ar is holding
+However, the purpose of the function is for the new copy to have a DIFFERENT address to the passed array
+
+### Fix
+
+By using calloc with the passed len argument, we are allocating NEW memory space for the copy of 'len' numbers of ints
+We parse the allocation with an int* and assign such to the int* copy.
+Lastly, we traverse through the passed ar argument, and set its value at i to be the value at i of the copy
+Additionally, because copy is now a dynamically allocated pointer, we have to refer to free() at the end of the TESTS
+
+```c++
+int* copy_array(int* ar, int len) {
+  /**
+  * Return a copy of the array
+  * @param ar: The array to copy
+  * @param len: The length of the array to copy
+  * @return: A copy of ar
+  */
+  int* copy = (int*)calloc(len, sizeof(int));
+
+  for (int i = 0; i < len; i++)
+  {
+    copy[i] = ar[i];
+  }
+
+  return copy;
 }
 ```
