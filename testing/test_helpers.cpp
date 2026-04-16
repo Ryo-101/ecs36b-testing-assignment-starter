@@ -6,6 +6,8 @@
 
 #include "rapidcheck/Assertions.h"
 
+
+// TESTING HELPER FUNCTIONS
 void expect_sorted(const int* array, const int len)
 {
     for (int i = 0; i < len - 1; i++)
@@ -61,4 +63,14 @@ char** string_vector_to_array_of_strings(std::vector<std::string> commandArgs)
     }
 
     return argsAsPointers;
+}
+
+void free_array_of_strings(char** array, const int len)
+{
+    for (int i = 0; i < len; i++)
+    {
+        free(array[i]);
+    }
+
+    free(array);
 }
