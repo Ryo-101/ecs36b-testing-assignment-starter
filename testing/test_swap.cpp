@@ -53,8 +53,8 @@ RC_GTEST_PROP(SwapTests,
 
     // Does the same as the parameters at the top, so can be deleted
     // Note: with every generator, it must be unreferenced to assign it to a variable
-    a_start = *rc::gen::arbitrary<int>();
-    b_start = *rc::gen::arbitrary<int>();
+    // a_start = *rc::gen::arbitrary<int>();
+    // b_start = *rc::gen::arbitrary<int>();
 
     const int tempA = a_start;
     const int tempB = b_start;

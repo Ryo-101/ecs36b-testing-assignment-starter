@@ -80,28 +80,52 @@ void parse_args(int argc, char** argv, int** ar_out, int* len_out)
 }
 ```
 
-### Bug 3
+### Bug #3: swap()
 
-### Location
+### Location: sorting.cpp
 
-Line number(s) of the bugs.
+Line(s): 61-71
 
 ```c++
-Copy of the buggy code
+void swap(int* a, int* b) {
+  /**
+ * Swap the values held in a and b.
+ * @param a: The address of the first element to swap.
+ * @param b: The address of the second element to swap.
+ */
+
+  int* temp = a;
+  a = b;
+  b = temp;
+}
 ```
 
 ### How the bug was located
 
-Explain how you found the bug
+Upon running a test, the expect values failed and program prompt it
 
 ### Description
 
-Describe the bug
+When calling the swap() function, the values held at the int* arguments should be swapped.
+However, this doesn't seem to be the case, resulting in a test failure
 
 ### Fix
 
-Explain how you fixed the bug
+On the current state that the code is written in, we are working with COPIES of addresses.
+This means that, without dereferencing them, we are simply interchanging the COPIES' addresses
+Because we are not swapping the addresses of the ORIGINAL variables being referred to, this doesn't work
+This can be easily fixed by dereferencing the addresses' COPIES, which then allows us to change the value at SUCH addresses.
 
 ```c++
-Copy of the fixed code
+void swap(int* a, int* b) {
+  /**
+ * Swap the values held in a and b.
+ * @param a: The address of the first element to swap.
+ * @param b: The address of the second element to swap.
+ */
+
+  int temp = *a;
+  *a = *b;
+  *b = temp;
+}
 ```
