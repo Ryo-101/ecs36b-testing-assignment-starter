@@ -150,10 +150,14 @@ RC_GTEST_PROP(ParseArgsTests,
     std::vector<std::string> commandArgs;
     commandArgs.push_back(programName);
 
+    char** argsAsPointers = (char**)calloc(commandArgs.size(), sizeof(char*));
+
+    argsAsPointers[0] = commandArgs[0].data();
+
     int* integers = (int*)88;
     int len;
 
-    parse_args(len, ..., integers, &len);
+    parse_args(1, argsAsPointers, integers, &len);
 
     RC_ASSERT(integers == nullptr);
     RC_ASSERT(len == 0);
