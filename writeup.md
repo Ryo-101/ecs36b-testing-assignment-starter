@@ -249,3 +249,56 @@ int min_index_of_array(int* ar, int len) {
   return min_index;
 }
 ```
+
+### Bug #6: make_sorted()
+
+### Location: sorting.cpp
+
+Line(s): 17-27
+
+```c++
+void make_sorted(int* ar, int len) {
+  /**
+ * Sort the given array in place.
+ * @param ar: The array to be sorted.
+ * @param len: The length of the array to be sorted.
+ */
+  for (int i = 0; i < len; ++i) {
+    int min_index = min_index_of_array(ar + i, len);
+    swap(ar + i, ar + min_index);
+  }
+}
+```
+
+### How the bug was located
+
+Upon running a test, the expected ascending order of values in an array failed and program prompt it
+
+### Description
+
+When calling the make_sorted() function, there are some issues being run with min_index_of_array()
+First off, in the attempt of capturing a smaller array of the original with every increment of i, it is not changing the len argument, meaning each array being passed is of same length, which is false
+Secondly, with how the min_index_of_array() was defined, it will return the index of the min value, but such index cannot be translated into the index of the original with each smaller array version
+In other words, the original array being 1, 2, 3, 4, 5, on the first iteration, min_index is 0, and so swap() is called with arr + i (being 0 as for 1st iteration) and arr + 0, which is fine at first BUT
+With the second iteration, we have the array 2, 3, 4, 5, so min_index turns out to ALSO be 0, and so swap is called with arr + i (being 1 as for 2nd iteration) and arr + 0, making the original array go from
+1, 2, 3, 4, 5 to 2, 1, 3, 4, 5. This pattern will continue onwards such that 1, 2, 3, 4, 5, would result in 5, 1, 2, 3, 4, WAYYY OFF
+
+
+### Fix
+
+With len, I simply added a -i as to signify each iteration the array becomes smaller until it reaches a length of 1.
+Upon writing doing the iterations, I noticed that adding a +i to the result of min_index_of_array(), would result in min_index referencing the right value in the ORIGINAL
+
+```c++
+void make_sorted(int* ar, int len) {
+  /**
+ * Sort the given array in place.
+ * @param ar: The array to be sorted.
+ * @param len: The length of the array to be sorted.
+ */
+  for (int i = 0; i < len; ++i) {
+    int min_index = min_index_of_array(ar + i, len - i) + i;
+    swap(ar + i, ar + min_index);
+  }
+}
+```
