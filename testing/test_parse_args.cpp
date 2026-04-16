@@ -110,10 +110,32 @@ RC_GTEST_PROP(ParseArgsTests,
     std::vector<std::string> commandArgs = vector_of_ints_to_vector_of_strings(values);
     commandArgs.insert(commandArgs.begin(), programName);
 
+    char** argsAsPointers = (char**)calloc(commandArgs.size(), sizeof(char*));
+
+    for (size_t i = 0; i < commandArgs.size(); i++)
+    {
+        argsAsPointers[i] = commandArgs[i].data();
+    }
+
     int* integers = (int*)88;
     int len;
 
-    parse_args(len + 1, ..., integers, &len);
+    parse_args(values.size() + 1, argsAsPointers, integers, &len);
+
+    RC_ASSERT(len == (int)values.size());
+
+    for (size_t i = 0; i < values.size(); i++)
+    {
+        RC_ASSERT(integers[i] == values[i]);
+    }
+
+    for (size_t j = 0; j < commandArgs.size(); j++)
+    {
+        free(argsAsPointers[j]);
+    }
+
+    free(argsAsPointers);
+
 }
 
 RC_GTEST_PROP(ParseArgsTests,
