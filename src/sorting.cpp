@@ -10,7 +10,7 @@ int* get_sorted(int* ar, int len) {
  */
 
   int* sorted_ar = copy_array(ar, len);
-  make_sorted(ar, len);
+  make_sorted(sorted_ar, len);
   return sorted_ar;
 }
 

@@ -302,3 +302,54 @@ void make_sorted(int* ar, int len) {
   }
 }
 ```
+
+### Bug #6: get_sorted()
+
+### Location: sorting.cpp
+
+Line(s): 4-15
+
+```c++
+int* get_sorted(int* ar, int len) {
+  /**
+ * Return a COPY of ar in sorted order.
+ * @param ar: The array to make a sorted copy of.
+ * @param len: The length of ar
+ * @return: A sorted copy of
+ */
+
+  int* sorted_ar = copy_array(ar, len);
+  make_sorted(ar, len);
+  return sorted_ar;
+}
+```
+
+### How the bug was located
+
+Upon running a test, the expected ascending order of values in an array failed and program prompt it
+
+### Description
+
+In the get_sorted() function, a copy is made of the array passed argument,
+but such copy isn't passed to the make_sorted() function,
+and upon returning such copy, its order remains the same as array passed argument
+
+
+### Fix
+
+Pass the intended copy of the argument array to the make_sorted() function
+
+```c++
+int* get_sorted(int* ar, int len) {
+  /**
+ * Return a COPY of ar in sorted order.
+ * @param ar: The array to make a sorted copy of.
+ * @param len: The length of ar
+ * @return: A sorted copy of
+ */
+
+  int* sorted_ar = copy_array(ar, len);
+  make_sorted(sorted_ar, len);
+  return sorted_ar;
+}
+```
