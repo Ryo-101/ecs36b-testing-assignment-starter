@@ -38,9 +38,8 @@ TEST(ParseArgsTests, SimpleCheckArgumentsParsedSuccessfully) {
      */
 
     char** strings = (char**)calloc(6, sizeof(char*));
-    strings[0] = (char*)calloc(6, sizeof(char));
 
-    for (int i = 1; i < 6; i++)
+    for (int i = 0; i < 6; i++)
     {
         strings[i] = (char*)calloc(3, sizeof(char));
     }
@@ -48,7 +47,7 @@ TEST(ParseArgsTests, SimpleCheckArgumentsParsedSuccessfully) {
     int* integers = (int*)88;
     int len;
 
-    strcpy(strings[0], "hello");
+    strcpy(strings[0], "hi");
     strcpy(strings[1], "1");
     strcpy(strings[2], "2");
     strcpy(strings[3], "3");
@@ -57,14 +56,15 @@ TEST(ParseArgsTests, SimpleCheckArgumentsParsedSuccessfully) {
 
     parse_args(6, strings, &integers, &len);
 
+    EXPECT_EQ(len, 5);
+
     for (int j = 0; j < 5; j++)
     {
         EXPECT_EQ(integers[j], std::atoi(strings[j+1]));
     }
 
-    EXPECT_EQ(len, 5);
-
     free_array_of_strings(strings, 6);
+    free(integers);
 
 }
 
@@ -93,13 +93,13 @@ TEST(ParseArgsTests, SimpleCheckParseNoArgs) {
 
 RC_GTEST_PROP(ParseArgsTests,
               PropertyCheckArgumentsParsedSuccessfully,
-              (std::vector<int> values)
+              ()
 ) {
     /* Check that we can correctly parse the command line
      * arguments when we receive 1 or more arguments.
      * Don't forget to free any memory that was dynamically allocated as part of this test
      */
-
+    std::vector<int> values = *rc::gen::nonEmpty<std::vector<int>>();
     const std::string programName = *word_generator();
     std::vector<std::string> commandArgs = vector_of_ints_to_vector_of_strings(values);
     commandArgs.insert(commandArgs.begin(), programName);
@@ -118,7 +118,7 @@ RC_GTEST_PROP(ParseArgsTests,
         RC_ASSERT(integers[i] == values[i]);
     }
 
-    free_array_of_strings(argsAsPointers, commandArgs.size());
+    free(argsAsPointers);
 
 }
 
@@ -144,6 +144,6 @@ RC_GTEST_PROP(ParseArgsTests,
     RC_ASSERT(integers == nullptr);
     RC_ASSERT(len == 0);
 
-    free_array_of_strings(argsAsPointers, 1);
+    free(argsAsPointers);
 
 }

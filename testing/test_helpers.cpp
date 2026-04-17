@@ -53,7 +53,7 @@ void rc_assert_no_overlap(const int* arrayOne, const int* arrayTwo, const int le
 }
 
 
-char** string_vector_to_array_of_strings(std::vector<std::string> commandArgs)
+char** string_vector_to_array_of_strings(std::vector<std::string>& commandArgs)
 {
     char** argsAsPointers = (char**)calloc(commandArgs.size(), sizeof(char*));
 

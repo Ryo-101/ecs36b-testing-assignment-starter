@@ -16,7 +16,7 @@ void rc_assert_sorted(const int* array, int len);
 void rc_assert_no_overlap(const int* arrayOne, const int* arrayTwo, int len);
 
 // VECTOR HELPER FUNCTIONS
-char** string_vector_to_array_of_strings(std::vector<std::string> commandArgs);
+char** string_vector_to_array_of_strings(std::vector<std::string> &commandArgs);
 
 void free_array_of_strings(char** array, int len);
 

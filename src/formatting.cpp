@@ -30,10 +30,16 @@ void parse_args(int argc, char** argv, int** ar_out, int* len_out){
  * @param len_out:  An output parameter. The number of elements placed into ar_out.
  */
 
+  if (argc == 1)
+  {
+    *ar_out = nullptr;
+    *len_out = 0;
+    return;
+  }
   *len_out = argc - 1;
-  ar_out = (int**)malloc(*len_out);
+  *ar_out = (int*)calloc(*len_out, sizeof(int));
   for(int i = 0; i < *len_out; ++i){
-    sscanf(argv[i], "%d", ar_out[i]);
+    sscanf(argv[i+1], "%d", *ar_out+i);
   }
 
 }
